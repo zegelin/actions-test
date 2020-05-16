@@ -1,0 +1,12 @@
+- >
+  CREATE KEYSPACE example WITH replication = {'class': 'EverywhereStrategy'};
+- >
+  CREATE TABLE example.demo_table (
+    a text,
+    b text,
+    PRIMARY KEY (a)
+  )
+- INSERT INTO example.demo_table (a, b) VALUES ('a', 'hello')
+- INSERT INTO example.demo_table (a, b) VALUES ('b', 'world')
+- INSERT INTO example.demo_table (a, b) VALUES ('c', 'universe')
+- INSERT INTO example.demo_table (a, b) VALUES ('d', 'galaxy')
