@@ -30,7 +30,7 @@ jobs:
         done
         tag_name="${GITHUB_REF##*/}"
         
-        hub release create "${assets[@]}" -m "$tag_name" "$tag_name"
+        hub release edit "${assets[@]}" -m "$tag_name" "$tag_name"
         
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,5 +42,8 @@ jobs:
         
         target="instaclustr/debian/instaclustr-everywhere-strategy/${deb_version}"
         
-        jfrog bt version-create "${target}"
-        jfrog bt upload "${deb_file}" "${target}"
+        jfrog bt --key "${BINTRAY_API_KEY}" version-create "${target}"
+        jfrog bt --key "${BINTRAY_API_KEY}" upload "${deb_file}" "${target}"
+        
+      env:
+        BINTRAY_API_KEY: ${{ secrets.BINTRAY_API_KEY }}
